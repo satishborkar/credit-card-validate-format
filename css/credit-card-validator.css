@@ -1,17 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
 
 body {
-    padding: 50px;
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
 }
 
-input {
+.app-container{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+[data-icons = true] {
     padding: 7px;
     min-width: 300px;
+    border:1px solid #333;
     margin-bottom: 10px;
+    background-image: url(../img/logos.png);
+    background-position:  99% 100%;
+    background-repeat: no-repeat;
+    transition: background-position ease-in 0.3s;
 }
+
+.mastercard{background-position:  99% -225px}
+.visa{background-position:  99% -33px}
+.dinersclub{background-position:  99% -95px}
+.discover{background-position:  99% -191px}
+.enRoute{background-position:  99% -128px}
+.jcb{background-position:  99% -161px}
+.maestro{background-position:  99% -1px}
+.amex{background-position:  99% -65px}
 
 .row{
     width: 100%;
@@ -23,4 +41,9 @@ input {
 
 .card-info{
     font-size: 12px;
+}
+
+.supported-logos img{
+    float: left;
+    max-width: 100px;
 }

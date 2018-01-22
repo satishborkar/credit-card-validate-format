@@ -8,21 +8,29 @@
 </head>
 
 <body>
-    <form>
-        <!-- <input type="text" id="txt_cardNumber" name="txt_cardNumber" pattern="[0-9.]+"> -->
-        <h2>Format &amp; Validate Credit Card Number in JavaScript </h2>
-        <input id="cc" type="text" value="" placeholder="XXXX XXXX XXXX XXXX" maxlength="23">
-        <div class="row card-info">
-            <div class="row">
+    <div class="app-container">
+        <form>
+            <h1>Format &amp; Validate Credit Card Number in JavaScript </h1>
+            <input id="cc" type="text" value="" placeholder="XXXX XXXX XXXX XXXX">
+            <div class="row card-info">
                 <label>Card Type : </label>
                 <label id="card-type"></label>
             </div>
-            <div id="card-type" class="row">
-                <label>Card Number Validity : </label>
-                <label id="card-valid"></label>
+
+            <div class="row">
+                <h2>Supported Cards</h2>
+                <div class="row supported-logos">
+                    <img src="img/american_Express_logo.png" alt="American Express">
+                    <img src="img/mastercard.png" alt="Mastercard">
+                    <img src="img/Visa_logo.png" alt="Visa">
+                    <img src="img/discover-logo.png" alt="Discover">
+                    <img src="img/jcb.jpg" alt="JCB">
+                    <img src="img/maestro.png" alt="Maestro">
+                    <img src="img/DinersClub.png" alt="Diners Club">
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
     <script src="js/credit-card-validator.js"></script>
 </body>
 

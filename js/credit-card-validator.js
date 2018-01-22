@@ -23,7 +23,6 @@ input.oninput = function (e) {
 
     this.value = this.lastValue = parts.join(' ');
     this.selectionStart = this.selectionEnd = caretPosition;
-
     handleEvent(event);
 };
 
@@ -31,36 +30,13 @@ function removeFormatting(num) {
     return num.replace(/\s/g, '');
 }
 
-// input.onblur = function (e) {
-//     var isValidCard;
-//     var cardValidElem = document.getElementById("card-valid");
-//     var originalValue = removeFormatting(e.target.value);   
-
-//     if (originalValue.length >= 14 && originalValue.length <= 19) {        
-//         isValidCard = isCreditCard(originalValue);
-//         console.log(isValidCard);
-//         if (cardValidElem) {
-//             cardValidElem.innerHTML = isValidCard;
-//         }
-//     }
-//     return isValidCard;
-// }
-
-//input.setAttribute('onkeypress', 'return checkDigit(event)');
-
-
 input.onkeypress = function(){
     return checkDigit(event);
 }
 
-input.onblur = function(e){
-    var val = removeFormatting(e.target.value);
-    console.log(isCreditCard(val));
-}
+input.setAttribute('data-icons', true)
 
 input.focus();
-
-
 
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
@@ -74,14 +50,10 @@ function checkDigit(event) {
 
 
 function getCreditCardType(cardNumber) {
-
-    //start without knowing the credit card type
     var card = {
         type: "unknown",
         maxlength: 23
     };
-
-    //console.log(cardNumber.replace(/\s/g,'').substring(0,6));
 
     // Diners Club and Carte Blanche
     // Valid length: 14 digits. 
@@ -101,7 +73,6 @@ function getCreditCardType(cardNumber) {
         };
     }
 
-
     // Discover
     // Valid length: 16 digits.
     // First 6 digits must be in one of the following ranges:
@@ -113,15 +84,8 @@ function getCreditCardType(cardNumber) {
     // 644000 through 659999
     else if (/^6/.test(cardNumber) &&
         (
-            // (cardNumber.replace(/\s/g,'').substring(0,6) >= 601100 && cardNumber.replace(/\s/g,'').substring(0,6) <= 601109) ||
-            // (cardNumber.replace(/\s/g,'').substring(0,6) >= 601120 && cardNumber.replace(/\s/g,'').substring(0,6) <= 601149) ||
-            // (cardNumber.replace(/\s/g,'').substring(0,6) >= 601177 && cardNumber.replace(/\s/g,'').substring(0,6) <= 601179) ||
-            // (cardNumber.replace(/\s/g,'').substring(0,6) >= 644000 && cardNumber.replace(/\s/g,'').substring(0,6) <= 659999) ||
-
-            //removed due to some card was not getting identified 
             (cardNumber.replace(/\s/g, '').substring(0, 6) >= 601100 && cardNumber.replace(/\s/g, '').substring(0, 6) <= 601199) ||
             (cardNumber.replace(/\s/g, '').substring(0, 6) >= 644000 && cardNumber.replace(/\s/g, '').substring(0, 6) <= 659999) //||
-            //(cardNumber.replace(/\s/g,'').substring(0,6) == 601174)
         )
     ) {
         var card = {
@@ -150,8 +114,6 @@ function getCreditCardType(cardNumber) {
             maxlength: 23
         };
     }
-
-
     // MasterCard
     // Valid length: 16 digits.
     // First digit must be 5 and second digit must be in the range 1 through 5 inclusive. 
@@ -214,7 +176,6 @@ function getCreditCardType(cardNumber) {
             maxlength: 18
         };
     }
-
     return card;
 };
 
@@ -222,56 +183,66 @@ function handleEvent(event) {
     var value = event.target.value,
         card = getCreditCardType(value),
         elem = document.getElementById("card-type");
-    //console.log(card);
+
     switch (card.type) {
         case "mastercard":
             elem.innerHTML = card.type;
+            event.target.className = "mastercard";
             event.target.setAttribute("maxlength", card.maxlength);
             //show MasterCard icon
             break;
 
         case "enRoute":
             elem.innerHTML = card.type;
+            event.target.className = "enRoute";
             event.target.setAttribute("maxlength", card.maxlength);
             //show MasterCard icon
             break;
 
         case "jcb":
             elem.innerHTML = card.type;
+            event.target.className = "jcb";
             event.target.setAttribute("maxlength", card.maxlength);
             //show MasterCard icon
             break;
 
         case "maestro":
             elem.innerHTML = card.type;
+            event.target.className = "maestro";
             event.target.setAttribute("maxlength", card.maxlength);
             //show MasterCard icon
             break;
 
         case "discover":
             elem.innerHTML = card.type;
+            event.target.className = "discover";
             event.target.setAttribute("maxlength", card.maxlength);
             //show MasterCard icon
             break;
 
         case "dinersclub":
             elem.innerHTML = card.type;
+            event.target.className = "dinersclub";
             event.target.setAttribute("maxlength", card.maxlength);
+            break;
 
         case "visa":
             //show Visa icon
             elem.innerHTML = card.type;
+            event.target.className = "visa";
             event.target.setAttribute("maxlength", card.maxlength);
             break;
 
         case "amex":
             //show American Express icon
             elem.innerHTML = card.type;
+            event.target.className = "amex";
             event.target.setAttribute("maxlength", card.maxlength);
             break;
 
         default:
             elem.innerHTML = card.type;
+            event.target.className = "none";
             event.target.setAttribute("maxlength", card.maxlength);
         //clear all icons?
         //show error?
@@ -281,8 +252,7 @@ function handleEvent(event) {
 
 function isCreditCard(st) {
     // Encoding only works on cards with less than 19 digits
-    var cardValidElem = document.getElementById("card-valid");
-
+   
     if (st.length > 19)
         return (false);
 
@@ -311,12 +281,9 @@ function isCreditCard(st) {
     //  alert("Sum      = " + sum);
 
     if ((sum % 10) == 0) {
-        cardValidElem.innerHTML = true;
         return true;
-
     }
     else {
-        cardValidElem.innerHTML = false;
         return false;
     }
 
