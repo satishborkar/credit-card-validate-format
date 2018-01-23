@@ -7,7 +7,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-*.*:before,*:after{
+*, *:before, *:after{
     font-family: 'Lato', sans-serif;
 }
 
