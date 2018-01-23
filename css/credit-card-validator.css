@@ -4,6 +4,11 @@ body {
     margin: 0;
     padding: 0;
     vertical-align: top;
+    font-family: 'Lato', sans-serif;
+}
+
+*.*:before,*:after{
+    font-family: 'Lato', sans-serif;
 }
 
 .app-container{
